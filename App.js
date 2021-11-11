@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Button, Image } from 'react-native';
 
 {/* https://openweathermap.org/current */}
-const weatherApiUrl = "http://api.openweathermap.org/data/2.5/weather?q=richardson,us-tx&appid=c8994bd806fee3ad5b68daf9cc245e95";
+const weatherApiUrl = "http://api.openweathermap.org/data/2.5/weather?q=richardson,us-tx&units=imperial&appid=c8994bd806fee3ad5b68daf9cc245e95";
 {/* https://www.openuv.io/uvindex */}
 const uvApiUrl = "https://api.openuv.io/api/v1/uv?lat=32.9482&lng=-96.7297";
 
@@ -31,7 +31,7 @@ export default function App() {
     setWeatherData(jsonData);
   };
 
-  const getUvData = async() => {
+  {/*const getUvData = async() => {
     const response = await fetch(uvApiUrl, {
       headers: {
         "x-access-token": "0bc4545928b01c6a587cc7dd522c365c"
@@ -39,13 +39,20 @@ export default function App() {
     });
     const jsonData = await response.json();
     setUvData(jsonData);
-  };
+  };*/}
+
+  {/*const getSensorData = async () => {
+    const response = await fetch(weatherApiUrl);
+    const jsonData = await response.json();
+    console.log(jsonData);
+    setWeatherData(jsonData);
+  };*/}
 
   return (
     <View style={styles.container}>
       <Text>TESTING WEATHER API - Current Temp: {Object.keys(weatherData).map((main) => (
         <Text>{weatherData[main].temp}</Text>
-      ))}</Text>
+      ))} degrees Farenheit</Text>
       <StatusBar style="auto" />
       <Button>{/* Put a right-aligned refresh button here? */}</Button>
       <Text> {/* Put center-aligned word for current weather here (e.g. Clear, Raining, etc..) */} </Text>
