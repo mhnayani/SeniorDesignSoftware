@@ -1,21 +1,51 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Button, Image } from 'react-native';
 
 {/* https://openweathermap.org/current */}
-const weatherApiUrl = "http://api.openweathermap.org/data/2.5/weather?q=richardson,tx&appid=c8994bd806fee3ad5b68daf9cc245e95";
+const weatherApiUrl = "http://api.openweathermap.org/data/2.5/weather?q=richardson,us-tx&appid=c8994bd806fee3ad5b68daf9cc245e95";
+{/* https://www.openuv.io/uvindex */}
+const uvApiUrl = "https://api.openuv.io/api/v1/uv?lat=32.9482&lng=-96.7297";
 
 export default function App() {
+  const [weatherData, setWeatherData] = useState([]);
+  const [uvData, setUvData] = useState({});
+  const [sensorData, setSensorData] = useState({});
+
+  useEffect(() => {
+    getWeatherData();
+  }, []);
+
+  useEffect(() => {
+    getWeatherData();
+  }, []);
+
+  useEffect(() => {
+    getWeatherData();
+  }, []);
 
   const getWeatherData = async () => {
     const response = await fetch(weatherApiUrl);
     const jsonData = await response.json();
-    setUserData(jsonData);
+    console.log(jsonData);
+    setWeatherData(jsonData);
+  };
+
+  const getUvData = async() => {
+    const response = await fetch(uvApiUrl, {
+      headers: {
+        "x-access-token": "0bc4545928b01c6a587cc7dd522c365c"
+      }
+    });
+    const jsonData = await response.json();
+    setUvData(jsonData);
   };
 
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text>TESTING WEATHER API - Current Temp: {Object.keys(weatherData).map((main) => (
+        <Text>{weatherData[main].temp}</Text>
+      ))}</Text>
       <StatusBar style="auto" />
       <Button>{/* Put a right-aligned refresh button here? */}</Button>
       <Text> {/* Put center-aligned word for current weather here (e.g. Clear, Raining, etc..) */} </Text>
