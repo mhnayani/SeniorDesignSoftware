@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import Weather from './components/weather';
 import UV from './components/uv';
+import RefreshBtn from './components/refreshBtn';
 
 export default function App() {
 
@@ -19,9 +20,9 @@ export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
+      <RefreshBtn />
       <Weather />
-      <UV />
-      <Button>{/* Put a right-aligned refresh button here? */}</Button>
+      {/*<UV />*/}
       <Text> {/* Put center-aligned word for current weather here (e.g. Clear, Raining, etc..) */} </Text>
       {/* Put weather image here based on what the weather is. */}
       {/* Put weather data and image here */}
@@ -36,11 +37,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#65a7b3',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  button: {
-
-  },
-  weatherText: {
-
   }
 });
