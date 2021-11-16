@@ -1,34 +1,31 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button, Image } from 'react-native';
+import { StyleSheet, View, } from 'react-native';
 import Weather from './components/weather';
 import UV from './components/uv';
 import RefreshBtn from './components/refreshBtn';
+import { useFonts } from 'expo-font';
+import AppLoading from 'expo-app-loading';
+
 
 export default function App() {
+  let [fontsLoaded] = useFonts({
+    'Montserrat-Regular': require('./assets/fonts/Montserrat-Regular.ttf'),
+  });
 
-  {/*const getUvData = async() => {
-    const response = await fetch(uvApiUrl, {
-      headers: {
-        "x-access-token": "0bc4545928b01c6a587cc7dd522c365c"
-      }
-    });
-    const jsonData = await response.json();
-    setUvData(jsonData);
-  };*/}
-
-  return (
-    <View style={styles.container}>
-      <StatusBar style="auto" />
-      <RefreshBtn />
-      <Weather />
-      {/*<UV />*/}
-      <Text> {/* Put center-aligned word for current weather here (e.g. Clear, Raining, etc..) */} </Text>
-      {/* Put weather image here based on what the weather is. */}
-      {/* Put weather data and image here */}
-      {/* Put sensor data box components in here.*/}
-    </View>
-  );
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
+    return (
+      <View style={styles.container}>
+        <StatusBar style="auto" />
+        {/* <RefreshBtn /> - BROKEN, DO NOT USE UNLESS FIXED, CRASHED APP ON BUTTON PRESS. Might be an issue with the react-native-restart library */}
+        <Weather />
+        {/*<UV />*/}
+        {/* Put sensor data box components in here.*/}
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
