@@ -1,17 +1,17 @@
 import { Pressable, View, StyleSheet, Image } from 'react-native';
 import React from 'react';
+import { RNRestart } from 'react-native-restart';
+import icon from '../assets/refresh_btn';
 
 const RefreshBtn = () => {
 
-    const startReload = () => {
-        window.location.reload(false);
-    };
+    const startReload = () => RNRestart.Restart();
 
     return(
         <View style={styles.container}>
             <Pressable style={styles.button} onPress={startReload}>
                 <Image 
-                    source = 'https://icon-library.com/images/refresh-icon-white/refresh-icon-white-1.jpg'
+                    source = {icon.refresh}
                     style = {styles.icon}
                 />
             </Pressable>
@@ -22,14 +22,12 @@ const RefreshBtn = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginLeft: '95%',
-        marginTop: '2%'
+        marginLeft: '80%',
+        marginTop: '15%'
     },
     button: {
-      alignItems: 'right',
-      justifyContent: 'right',
-      paddingVertical: 3,
-      paddingHorizontal: 3,
+      alignItems: 'flex-end',
+      justifyContent: 'flex-end',
       borderRadius: 4,
     },
     icon: {

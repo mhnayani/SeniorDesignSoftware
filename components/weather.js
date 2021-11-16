@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, Image, StyleSheet } from 'react-native';
+import images from '../assets/weather';
 
 const weatherApiUrl = "http://api.openweathermap.org/data/2.5/weather?q=richardson,us-tx&units=imperial&appid=c8994bd806fee3ad5b68daf9cc245e95";
 
@@ -20,7 +21,7 @@ const Weather = (props) => {
         <View style={ styles.container }>
             <Text style = { styles.textHeader }>{ weatherData.main }</Text>
             <Image 
-                source = { `http://openweathermap.org/img/wn/${weatherData.iconCode}@2x.png` }
+                source = { images[weatherData.iconCode] }
                 style = { styles.icon }
             />
             <Text style = { styles.textHeader }>{Math.round(weatherData.temp)}&deg;</Text>
@@ -36,12 +37,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     textHeader: {
-        fontFamily: 'montserrat',
+        fontFamily: 'Montserrat-Regular',
         fontSize: 24,
         color: 'white'
     },
     textNonHeader: {
-        fontFamily: 'montserrat',
+        fontFamily: 'Montserrat-Regular',
         fontSize: 14,
         color: 'white'
     },
