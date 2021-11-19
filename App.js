@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, } from 'react-native';
 import Weather from './components/weather';
+import sensorBox from './components/sensorBox';
 import UV from './components/uv';
 import RefreshBtn from './components/refreshBtn';
 import { useFonts } from 'expo-font';
@@ -21,6 +22,7 @@ export default function App() {
         <StatusBar style="auto" />
         {/* <RefreshBtn /> - BROKEN, DO NOT USE UNLESS FIXED, CRASHED APP ON BUTTON PRESS. Might be an issue with the react-native-restart library */}
         <Weather />
+        <sensorBox desc={"Stable"} type={"pH"} measurement={"7.81 pH"}/>
         {/*<UV />*/}
         {/* Put sensor data box components in here.*/}
       </View>
