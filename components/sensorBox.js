@@ -17,7 +17,9 @@ const styles = StyleSheet.create({
       borderTopWidth: 2,
       borderTopColor: "white",
       borderBottomWidth: 2,
-      borderBottomColor: "white"
+      borderBottomColor: "white",
+      marginBottom: 2,
+      marginTop: 2
   },
   textHeader: {
       fontFamily: 'Montserrat-Regular',

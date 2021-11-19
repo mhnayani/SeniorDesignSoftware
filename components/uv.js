@@ -45,11 +45,6 @@ const styles = StyleSheet.create({
       fontFamily: 'Montserrat-Regular',
       fontSize: 14,
       color: 'white'
-  },
-  icon: {
-      height: 100,
-      width: 100,
-      resizeMode: 'stretch'
   }
 });
 
