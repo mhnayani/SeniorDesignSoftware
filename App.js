@@ -4,6 +4,7 @@ import { StyleSheet, View, } from 'react-native';
 import Weather from './components/weather';
 import UV from './components/uv';
 import RefreshBtn from './components/refreshBtn';
+import AllSensors from './components/allSensors';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 
@@ -22,7 +23,7 @@ export default function App() {
         {/* <RefreshBtn /> - BROKEN, DO NOT USE UNLESS FIXED, CRASHED APP ON BUTTON PRESS. Might be an issue with the react-native-restart library */}
         <Weather />
         {/*<UV />*/}
-        {/* Put sensor data box components in here.*/}
+        <AllSensors />
       </View>
     );
   }
