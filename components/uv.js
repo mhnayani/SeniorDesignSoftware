@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 import Sensor from './sensor';
 
 {/* https://www.openuv.io/uvindex */}
 const uvApiUrl = "https://api.openuv.io/api/v1/uv?lat=32.9482&lng=-96.7297";
 
 const UV = (props) => {
-    const [uvData, setUvData] = useState({});
-
+  const [uvData, setUvData] = useState({});
     useEffect(() => {
         getUvData();
     }, []);
-
     const getUvData = async() => {
         const response = await fetch(uvApiUrl, {
           headers: {
@@ -24,9 +21,9 @@ const UV = (props) => {
         setUvData({ uv: jsonData.result.uv });
     };
 
-    return (
-      <Sensor descriptor='UV' measurement={uvData.uv} unit='UV'/>
-    );
+  return (
+    <Sensor descriptor='UV' measurement={uvData.uv} unit='UV'/>
+  );
 }
 
-export default UV
+export default UV 
