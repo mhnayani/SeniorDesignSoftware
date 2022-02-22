@@ -10,20 +10,23 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "axios": "^0.26.0",
     "expo": "~43.0.2",
     "expo-app-loading": "~1.2.1",
     "expo-font": "~10.0.3",
     "expo-status-bar": "~1.1.0",
+    "http-proxy-middleware": "^2.0.3",
     "jquery": "^3.6.0",
     "mongodb": "^4.4.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
     "react-native-restart": "0.0.22",
-    "react-native-web": "0.17.1"
+    "react-native-web": "0.17.1",
+    "realm": "^10.13.0",
+    "realm-web": "^1.7.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
-  },
-  "private": true
+  }
 }
