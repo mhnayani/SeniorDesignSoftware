@@ -15,7 +15,7 @@ const AllSensors = (props) => {
       const user = await app.logIn(Realm.Credentials.anonymous());
       const client = app.currentUser.mongoClient('mongodb-atlas');
       const readings = client.db('SeniorDesign').collection('PrimaryCollection');
-      const result = await readings.findOne();
+      const result = await readings.find();
       console.log(result);
     };
 
