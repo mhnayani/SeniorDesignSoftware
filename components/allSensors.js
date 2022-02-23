@@ -15,12 +15,23 @@ const AllSensors = (props) => {
       const user = await app.logIn(Realm.Credentials.anonymous());
       const client = app.currentUser.mongoClient('mongodb-atlas');
       const readings = client.db('SeniorDesign').collection('PrimaryCollection');
+
+      // Get newest reading and set the state to the appropriate values.
       const result = await readings.find();
       console.log('All readings...');
       console.log(result);
       console.log('Newest reading...');
       console.log(result[result.length - 1]);
       setMongoData({ orp: result[result.length - 1].orp, ph: result[result.length - 1].ph, temp: result[result.length - 1].temp, timestamp: result[result.length - 1].time });
+
+      // Delete oldest records until there are at most 800 records.
+      if(result.length > 800) {
+        const numRecordsToDelete = result.length - 800;
+        for(let i = 0; i < numRecordsToDelete; i++){
+            const deleteResult = await readings.deleteOne();
+            console.log(`Deleted ${deleteResult.deletedCount} records.`);
+        }
+      }
     };
 
 
