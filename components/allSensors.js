@@ -2,45 +2,47 @@ import React, { useState, useEffect } from 'react';
 import Sensor from './sensor';
 import * as Realm from 'realm-web';
 
-const REALM_APP_ID = 'application-0-uifwd';
+const REALM_APP_ID = "application-0-uifwd";
 const app = new Realm.App({ id: REALM_APP_ID });
-const REALM_API_KEY = '3nrxriTdAxhTIr9CdPtTdCir5erml3GObKGJLladTdIlexukHSOWbZ2j2XGNdhti';
+const TEMP_UNITS = { Farenheight: 'degrees F', Celsius: 'degrees C' };
 
 const AllSensors = (props) => {
-    const [mongoData, setMongoData] = useState({});
+    const [mongoData, setMongoData] = useState({ ph: '', orp: '', temp: '' });
+    const [tempUnit, setTempUnit] = useState(TEMP_UNITS.Farenheight);
 
     useEffect(() => {
         getMongoData();
     }, []);
+
     const getMongoData = async() => {
-      const user = await app.logIn(Realm.Credentials.apiKey(REALM_API_KEY));
+      const user = await app.logIn(Realm.Credentials.anonymous());
       const client = app.currentUser.mongoClient('mongodb-atlas');
+
+      // Use the first reading of the pool sensor as the data to display on the front-end
       const readings = client.db('SeniorDesign').collection('PrimaryCollection');
-
-      // Get newest reading and set the state to the appropriate values.
-      const result = await readings.find();
-      console.log('All readings...');
-      console.log(result);
-      console.log('Newest reading...');
-      console.log(result[result.length - 1]);
-      setMongoData({ orp: result[result.length - 1].orp, ph: result[result.length - 1].ph, temp: result[result.length - 1].temp, timestamp: result[result.length - 1].time });
-
-      // Delete oldest records until there are at most 800 records.
-      if(result.length > 800) {
-        const numRecordsToDelete = result.length - 800;
-        for(let i = 0; i < numRecordsToDelete; i++){
-            const deleteResult = await readings.deleteOne();
-            console.log(`Deleted ${deleteResult.deletedCount} records.`);
-        }
-      }
+      const [result] = await readings.find();
+      setMongoData(result);
     };
 
+    const toggleTempUnit = () => {
+      if (tempUnit === TEMP_UNITS.Farenheight) {
+        // Convert from Farenheight to Celsius
+        const temp = Math.round((mongoData.temp - 32) * (5 / 9));
+        setMongoData({ ...mongoData, temp });
+        setTempUnit(TEMP_UNITS.Celsius);
+      } else {
+        // Convert from Celsius to Farenheight
+        const temp = Math.round(mongoData.temp * (9 / 5) + 32);
+        setMongoData({ ...mongoData, temp });
+        setTempUnit(TEMP_UNITS.Farenheight);
+      }
+    }
 
     return (
         <>
-            <Sensor descriptor='Pool Temp' measurement={mongoData.temp} unit='&deg;C'/>
-            <Sensor descriptor='pH Level' measurement={mongoData.ph} unit='pH'/>
-            <Sensor descriptor='ORP Level' measurement={mongoData.orp} unit='mV'/>
+            <Sensor descriptor='pH' measurement={mongoData.ph} unit='pH'/>
+            <Sensor descriptor='ORP' measurement={mongoData.orp} unit='mV'/>
+            <Sensor onPressUnit={toggleTempUnit} descriptor='Pool Temp' measurement={mongoData.temp} unit={tempUnit}/>
         </>
     );
 }
