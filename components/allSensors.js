@@ -16,15 +16,19 @@ const AllSensors = (props) => {
       const client = app.currentUser.mongoClient('mongodb-atlas');
       const readings = client.db('SeniorDesign').collection('PrimaryCollection');
       const result = await readings.find();
+      console.log('All readings...');
       console.log(result);
+      console.log('Newest reading...');
+      console.log(result[result.length - 1]);
+      setMongoData({ orp: result[result.length - 1].orp, ph: result[result.length - 1].ph, temp: result[result.length - 1].temp, timestamp: result[result.length - 1].time });
     };
 
 
     return (
         <>
-            <Sensor descriptor='pH' measurement='7.2' unit='pH'/>
-            <Sensor descriptor='ORP' measurement='720' unit='mV'/>
-            <Sensor descriptor='Pool Temp' measurement='72' unit='degrees F'/>
+            <Sensor descriptor='pH' measurement={mongoData.ph} unit='pH'/>
+            <Sensor descriptor='ORP' measurement={mongoData.orp} unit='mV'/>
+            <Sensor descriptor='Pool Temp' measurement={mongoData.temp} unit='&deg;C'/>
         </>
     );
 }
