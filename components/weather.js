@@ -43,8 +43,8 @@ const Weather = (props) => {
                 style = { styles.icon }
             />
             <TouchableOpacity onPress={toggleTempUnit}>
-                <Text style = { styles.textHeader }>{Math.round(weatherData.temp)}&deg;{tempUnit}</Text>
-                <Text style = { styles.textNonHeader }>Feels like {Math.round(weatherData.feelsLike)}&deg;{tempUnit}</Text>
+                <Text style = { styles.textHeader }>{Math.round(weatherData.temp)} &deg;{tempUnit}</Text>
+                <Text style = { styles.textNonHeader }>Feels like {Math.round(weatherData.feelsLike)} &deg;{tempUnit}</Text>
             </TouchableOpacity>
         </View>
     );
