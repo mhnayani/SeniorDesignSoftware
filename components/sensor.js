@@ -1,23 +1,24 @@
 import React from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
 
 const Sensor = (props) => {
+   const unitText = <Text style = {styles.sideText}>{props.unit}</Text>;
    return (
       <View style = {styles.container}>
             <Text style = {styles.sideText}>{props.descriptor}</Text>
             <Text style = {styles.middleText}>{props.measurement}</Text>
-            <Text style = {styles.sideText}>{props.unit}</Text>
+            {props.onPressUnit ? <TouchableOpacity onPress={props.onPressUnit}>{unitText}</TouchableOpacity> : unitText}
       </View>
    )
 }
 
 const styles = StyleSheet.create ({
    container: {
-        flex: 1,
+        flex: 0.5,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        width: '90%',
+        width: '80%',
         borderWidth: 1,
         borderLeftWidth: 0,
         borderRightWidth: 0,

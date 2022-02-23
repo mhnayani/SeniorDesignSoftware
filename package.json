@@ -19,7 +19,8 @@
     "react-native": "0.64.3",
     "react-native-restart": "0.0.22",
     "react-native-web": "0.17.1",
-    "realm-web": "^1.7.0"
+    "realm-web": "^1.7.0",
+    "text-encoding": "^0.7.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
