@@ -26,9 +26,9 @@ const AllSensors = (props) => {
 
     return (
         <>
-            <Sensor descriptor='pH' measurement={mongoData.ph} unit='pH'/>
-            <Sensor descriptor='ORP' measurement={mongoData.orp} unit='mV'/>
             <Sensor descriptor='Pool Temp' measurement={mongoData.temp} unit='&deg;C'/>
+            <Sensor descriptor='pH Level' measurement={mongoData.ph} unit='pH'/>
+            <Sensor descriptor='ORP Level' measurement={mongoData.orp} unit='mV'/>
         </>
     );
 }
