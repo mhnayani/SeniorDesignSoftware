@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Text, StyleSheet } from 'react-native';
 import Sensor from './sensor';
 import * as Realm from 'realm-web';
 
@@ -8,8 +9,9 @@ const REALM_API_KEY = '3nrxriTdAxhTIr9CdPtTdCir5erml3GObKGJLladTdIlexukHSOWbZ2j2
 const TEMP_UNITS = { Farenheight: 'degrees F', Celsius: 'degrees C' };
 
 const AllSensors = (props) => {
-    const [mongoData, setMongoData] = useState({ ph: '', orp: '', temp: '', timestamp: '' });
+    const [mongoData, setMongoData] = useState({ ph: '', orp: '', temp: '', time: '' });
     const [tempUnit, setTempUnit] = useState(TEMP_UNITS.Farenheight);
+    const [timestamp, setTimestamp] = useState({ formattedTimestamp: ''});
 
     useEffect(() => {
         getMongoData();
@@ -22,7 +24,11 @@ const AllSensors = (props) => {
       const result = await readings.find();
 
       // Set newest reading as the data to be displayed on the frontend. Newest reading is the last record in the collection.
-      setMongoData({ orp: result[result.length - 1].orp, ph: result[result.length - 1].ph, temp: result[result.length - 1].temp, timestamp: result[result.length - 1].time });
+      setMongoData({ orp: result[result.length - 1].orp, ph: result[result.length - 1].ph, temp: result[result.length - 1].temp, time: result[result.length - 1].time });
+      
+      // Create formatted timestamp
+      const date = new Date(result[result.length - 1].time);
+      setTimestamp({ formattedTimestamp: date.toLocaleString() });
 
       // Delete oldest records until there are at most 800 records.
       if(result.length > 800) {
@@ -50,11 +56,21 @@ const AllSensors = (props) => {
 
     return (
         <>
-            <Sensor onPressUnit={toggleTempUnit} descriptor='Pool Temp' measurement={mongoData.temp} unit={tempUnit}/>
-            <Sensor descriptor='pH' measurement={mongoData.ph} unit='pH'/>
-            <Sensor descriptor='ORP' measurement={mongoData.orp} unit='mV'/>
+          <Sensor onPressUnit={toggleTempUnit} descriptor='Pool Temp' measurement={mongoData.temp} unit={tempUnit}/>
+          <Sensor descriptor='pH' measurement={mongoData.ph} unit='pH'/>
+          <Sensor descriptor='ORP' measurement={mongoData.orp} unit='mV'/>
+          <Text style={styles.timestampText}>Last updated: {timestamp.formattedTimestamp}</Text>
         </>
     );
 }
+
+const styles = StyleSheet.create({
+  timestampText: {
+      fontFamily: 'Montserrat-Regular',
+      fontSize: 12,
+      color: 'white',
+      marginTop: 5
+  },
+});
 
 export default AllSensors
