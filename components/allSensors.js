@@ -56,11 +56,10 @@ const AllSensors = (props) => {
 
     return (
         <>
-          <Button onPress={getMongoData} title="Refresh"/>
-          <Sensor onPressUnit={toggleTempUnit} descriptor='Pool Temp' measurement={mongoData.temp} unit={tempUnit}/>
-          <Sensor descriptor='pH' measurement={mongoData.ph} unit='pH'/>
-          <Sensor descriptor='ORP' measurement={mongoData.orp} unit='mV'/>
-          <Text style={styles.timestampText}>Last updated: {timestamp.formattedTimestamp}</Text>
+            <Sensor onPressUnit={toggleTempUnit} descriptor='Pool Temp' measurement={mongoData.temp} unit={tempUnit}/>
+            <Sensor descriptor='pH' measurement={mongoData.ph} unit='pH'/>
+            <Sensor descriptor='ORP' measurement={mongoData.orp} unit='mV'/>
+            <Text style={styles.timestampText}>Last updated: {timestamp.formattedTimestamp}</Text>
         </>
     );
 }
