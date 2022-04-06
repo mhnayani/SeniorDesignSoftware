@@ -25,7 +25,11 @@ const AllSensors = (props) => {
 
       // Set newest reading as the data to be displayed on the frontend. Newest reading is the last record in the collection.
       setMongoData({ orp: result[result.length - 1].orp, ph: result[result.length - 1].ph, temp: result[result.length - 1].temp, time: result[result.length - 1].time });
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> 79169d3f13b14ded665c2f500e939fadf6dcff5f
       // Create formatted timestamp
       const date = new Date(result[result.length - 1].time);
       setTimestamp({ formattedTimestamp: date.toLocaleString() });
