@@ -25,7 +25,7 @@ export default function App() {
         <StatusBar style="auto" />
         {/* <RefreshBtn /> - BROKEN, DO NOT USE UNLESS FIXED, CRASHED APP ON BUTTON PRESS. Might be an issue with the react-native-restart library */}
         <Weather />
-        {/*<UV />*/}
+        <UV />
         <AllSensors />
         <DateTime />
       </SafeAreaView>

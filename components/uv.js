@@ -18,7 +18,9 @@ const UV = (props) => {
         const jsonData = await response.json();
         console.log(jsonData);
         console.log(jsonData.result.uv);
-        setUvData({ uv: jsonData.result.uv });
+        var uvIndex = jsonData.result.uv;
+        uvIndex = uvIndex.toFixed(1);
+        setUvData({ uv: uvIndex });
     };
 
   return (
