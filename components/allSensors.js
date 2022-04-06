@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet, Button } from 'react-native';
 import Sensor from './sensor';
 import * as Realm from 'realm-web';
 
@@ -10,7 +10,7 @@ const TEMP_UNITS = { Farenheight: 'degrees F', Celsius: 'degrees C' };
 
 const AllSensors = (props) => {
     const [mongoData, setMongoData] = useState({ ph: '', orp: '', temp: '', time: '' });
-    const [tempUnit, setTempUnit] = useState(TEMP_UNITS.Farenheight);
+    const [tempUnit, setTempUnit] = useState(TEMP_UNITS.Celsius);
     const [timestamp, setTimestamp] = useState({ formattedTimestamp: ''});
 
     useEffect(() => {
@@ -56,6 +56,7 @@ const AllSensors = (props) => {
 
     return (
         <>
+          <Button onPress={getMongoData} title="Refresh"/>
           <Sensor onPressUnit={toggleTempUnit} descriptor='Pool Temp' measurement={mongoData.temp} unit={tempUnit}/>
           <Sensor descriptor='pH' measurement={mongoData.ph} unit='pH'/>
           <Sensor descriptor='ORP' measurement={mongoData.orp} unit='mV'/>
