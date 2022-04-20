@@ -17,7 +17,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.zachjordan16.SeniorDesignSoftware"
     },
     "android": {
       "adaptiveIcon": {
