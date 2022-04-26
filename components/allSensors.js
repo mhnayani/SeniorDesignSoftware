@@ -10,7 +10,7 @@ const TEMP_UNITS = { Farenheight: 'degrees F', Celsius: 'degrees C' };
 
 const AllSensors = (props) => {
   const [poolData, setPoolData] = useState({ uv: '', ph: '', orp: '', temp: '', time: '' });
-  const [tempUnit, setTempUnit] = useState(TEMP_UNITS.Farenheight);
+  const [tempUnit, setTempUnit] = useState(TEMP_UNITS.Celsius);
   const [timestamp, setTimestamp] = useState({ formattedTimestamp: '' });
 
   useEffect(() => {
