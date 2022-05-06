@@ -75,11 +75,11 @@ const AllSensors = (props) => {
   const uvDot = (() => {
     if (poolData.uv >= 11) {
       return { color: 'purple', tooltip: 'Extremely High, Extra Protection Recommended' };
-    } else if (poolData.uv >= 8 && poolData < 11) {
+    } else if (poolData.uv >= 8 && poolData.uv < 11) {
       return { color: 'red', tooltip: 'Very High, Extra Protection Recommended' };
-    } else if (poolData.uv >= 6 && poolData && poolData < 8) {
+    } else if (poolData.uv >= 6 && poolData.uv < 8) {
       return { color: 'orange', tooltip: 'High, Protection Recommended' };
-    } else if (poolData.uv >= 3 && poolData < 6) {
+    } else if (poolData.uv >= 3 && poolData.uv < 6) {
       return { color: 'yellow', tooltip: 'Medium, Protection Recommended' };
     }
     return { color: 'green', tooltip: 'No Protection' };
